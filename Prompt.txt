@@ -1,0 +1,9 @@
+
+PROMPT :
+1. At iQuery, we provide Centre of Excellence (COE) as a service to our partner schools and attached set of documents have all relevant details 
+for the same. Please look upto all the atached files to familiarize yourself with
+
+2. Now i want to build a digital first platform for schools owners/ Spocs to login and view their services/ audits/ progress report etc. Someone like student/ parent from 
+a family can also login and view their progress report and various skill-based services which the COE can provide 
+
+Now, keeping this in mind can you help in building a digital journey based system where a spoc can login/ create account/ view above details etc 

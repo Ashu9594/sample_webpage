@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iQuery COE — Digital Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a222d;
+      --surface-2: #232d3a;
+      --border: #2f3d4d;
+      --text: #e8eef4;
+      --muted: #94a3b8;
+      --accent: #3db8a0;
+      --accent-dim: #2a8f7a;
+      --warm: #e8a84a;
+      --danger: #f07178;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      --font: "DM Sans", system-ui, sans-serif;
+      --font-display: "Fraunces", Georgia, serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(61, 184, 160, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(232, 168, 74, 0.08), transparent);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .app {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem 3rem;
+    }
+
+    header.site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    nav.header-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.1rem;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--muted);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0f12;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #4dd4b8;
+      border-color: #4dd4b8;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: rgba(61, 184, 160, 0.12);
+    }
+
+    .view {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .view.is-active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      padding: 2.5rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin: 0 0 1rem;
+      max-width: 32ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero p.lead {
+      color: var(--muted);
+      max-width: 42ch;
+      margin: 0 auto 2rem;
+      font-size: 1.0625rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: rgba(61, 184, 160, 0.12);
+      border: 1px solid rgba(61, 184, 160, 0.35);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .cards-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: left;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(61, 184, 160, 0.4);
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      font-size: 0.9375rem;
+    }
+
+    .card ul {
+      margin: 0 0 1.25rem;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .card ul li {
+      margin-bottom: 0.35rem;
+    }
+
+    .auth-panel {
+      max-width: 420px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .auth-panel h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin: 0 0 0.25rem;
+    }
+
+    .auth-panel .sub {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+      padding: 0.25rem;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 0.5rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .tabs button.is-selected {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .role-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .role-toggle label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .role-toggle input {
+      accent-color: var(--accent);
+    }
+
+    .role-toggle label:has(input:checked) {
+      border-color: var(--accent);
+      background: rgba(61, 184, 160, 0.1);
+    }
+
+    label.field {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      margin-bottom: 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(61, 184, 160, 0.2);
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .form-actions .btn {
+      width: 100%;
+    }
+
+    .hint {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .msg {
+      font-size: 0.875rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .msg.is-visible {
+      display: block;
+    }
+
+    .msg-error {
+      background: rgba(240, 113, 120, 0.12);
+      border: 1px solid rgba(240, 113, 120, 0.35);
+      color: #fca5a5;
+    }
+
+    .dashboard-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dashboard-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin: 0 0 0.25rem;
+    }
+
+    .dashboard-header .role-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--warm);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+
+    .panel h2 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel h2 .tag {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(61, 184, 160, 0.12);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .list-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .row-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    }
+
+    .row-item:hover {
+      border-color: rgba(61, 184, 160, 0.45);
+      background: #2a3544;
+    }
+
+    .row-item:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(61, 184, 160, 0.25);
+    }
+
+    .row-item .row-chevron {
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .panel-hint {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin: -0.5rem 0 0.75rem;
+    }
+
+    .row-item strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+    }
+
+    .row-item span.meta {
+      color: var(--muted);
+      font-size: 0.8125rem;
+    }
+
+    .status {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.45rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .status-ok {
+      background: rgba(61, 184, 160, 0.2);
+      color: var(--accent);
+    }
+
+    .status-warn {
+      background: rgba(232, 168, 74, 0.2);
+      color: var(--warm);
+    }
+
+    .status-pending {
+      background: rgba(148, 163, 184, 0.2);
+      color: var(--muted);
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--surface-2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .progress-bar i {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      border-radius: 3px;
+    }
+
+    footer.site-footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8125rem;
+      padding: 2rem 0 1rem;
+      margin-top: 2rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background: rgba(5, 10, 15, 0.75);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+    }
+
+    .modal-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      width: min(520px, 100%);
+      max-height: min(88vh, 720px);
+      overflow: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transform: translateY(12px) scale(0.98);
+      transition: transform 0.2s;
+    }
+
+    .modal-backdrop.is-open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.25rem 0;
+    }
+
+    .modal-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin: 0 0 0.35rem;
+      line-height: 1.3;
+    }
+
+    .modal-type {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+
+    .modal-close {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+      border-color: var(--muted);
+    }
+
+    .modal-body {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .modal-body p.summary {
+      color: var(--muted);
+      font-size: 0.9375rem;
+      margin: 0 0 1rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 0.65rem;
+      background: var(--surface-2);
+      border-radius: var(--radius-sm);
+      font-size: 0.8125rem;
+    }
+
+    .detail-row span:first-child {
+      color: var(--muted);
+    }
+
+    .detail-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .detail-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .detail-list li strong {
+      color: var(--text);
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-actions .btn {
+      font-size: 0.8125rem;
+      padding: 0.5rem 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <div class="logo">iQuery <span>COE</span></div>
+      <nav class="header-nav" id="headerNav">
+        <button type="button" class="btn btn-ghost" data-show="landing">Home</button>
+        <button type="button" class="btn btn-primary" id="headerLoginBtn" data-show="auth">Sign in</button>
+      </nav>
+    </header>
+
+    <!-- Landing -->
+    <section id="view-landing" class="view is-active" aria-labelledby="landing-title">
+      <div class="hero">
+        <span class="pill">Centre of Excellence as a service</span>
+        <h1 id="landing-title">One digital home for your school and every family</h1>
+        <p class="lead">
+          Partner schools use iQuery COE for audits, services, and progress insight. School leaders and families each get a tailored journey—secure, clear, and built for action.
+        </p>
+        <button type="button" class="btn btn-primary" data-show="auth">Get started</button>
+      </div>
+      <div class="cards-two">
+        <article class="card">
+          <h2>School owner / SPOC</h2>
+          <p>Create an account, sign in, and manage your COE relationship in one place.</p>
+          <ul>
+            <li>Service catalogue and delivery status</li>
+            <li>Audit schedules and findings</li>
+            <li>School-wide progress reports</li>
+          </ul>
+          <button type="button" class="btn btn-outline" data-show="auth" data-role="spoc">Continue as SPOC</button>
+        </article>
+        <article class="card">
+          <h2>Parent / student</h2>
+          <p>See how learners are growing with COE programmes and skill-based offerings.</p>
+          <ul>
+            <li>Individual progress reports</li>
+            <li>Skill pathways and workshops</li>
+            <li>Messages tied to your child’s journey</li>
+          </ul>
+          <button type="button" class="btn btn-outline" data-show="auth" data-role="family">Continue as family</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Auth -->
+    <section id="view-auth" class="view" aria-labelledby="auth-title">
+      <div class="auth-panel">
+        <h1 id="auth-title">Welcome back</h1>
+        <p class="sub">This prototype signs you in entirely in the browser—use any email and a password of at least 6 characters to explore the journey.</p>
+        <div id="authMsg" class="msg msg-error" role="alert"></div>
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" id="tab-signin" class="is-selected" aria-selected="true">Sign in</button>
+          <button type="button" role="tab" id="tab-signup" aria-selected="false">Create account</button>
+        </div>
+        <form id="authForm" novalidate>
+          <div class="role-toggle" aria-label="Account type">
+            <label>
+              <input type="radio" name="role" value="spoc" checked />
+              School SPOC
+            </label>
+            <label>
+              <input type="radio" name="role" value="family" />
+              Parent / student
+            </label>
+          </div>
+          <div id="signupExtra" hidden>
+            <label class="field" for="org">School / organisation</label>
+            <input type="text" id="org" name="org" autocomplete="organization" placeholder="e.g. Riverside International School" />
+          </div>
+          <label class="field" for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@school.edu" />
+          <label class="field" for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password" minlength="6" placeholder="••••••••" />
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="authSubmit">Sign in</button>
+          </div>
+        </form>
+        <p class="hint">
+          Nothing you enter leaves this page: there is no server call and no account is created. Suitable for walkthroughs and stakeholder reviews.
+        </p>
+      </div>
+    </section>
+
+    <!-- Dashboard SPOC -->
+    <section id="view-dashboard-spoc" class="view" aria-labelledby="dash-spoc-title">
+      <div class="dashboard-header">
+        <div>
+          <span class="role-badge">School SPOC</span>
+          <h1 id="dash-spoc-title">Greenfield Academy</h1>
+          <p class="sub" style="margin: 0; color: var(--muted); font-size: 0.9375rem;">COE partner since 2024 · Programme health overview</p>
+        </div>
+        <button type="button" class="btn btn-ghost" id="logoutSpoc">Sign out</button>
+      </div>
+      <div class="dashboard-grid">
+        <div class="panel">
+          <h2>Active services <span class="tag">COE</span></h2>
+          <p class="panel-hint">Tap any row for full details</p>
+          <div class="list-rows" id="spocServices"></div>
+        </div>
+        <div class="panel">
+          <h2>Audits</h2>
+          <p class="panel-hint">Tap any row for full details</p>
+          <div class="list-rows" id="spocAudits"></div>
+        </div>
+        <div class="panel" style="grid-column: 1 / -1;">
+          <h2>School progress report</h2>
+          <p class="panel-hint">Tap any row for full details</p>
+          <div class="list-rows" id="spocReports"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Family -->
+    <section id="view-dashboard-family" class="view" aria-labelledby="dash-family-title">
+      <div class="dashboard-header">
+        <div>
+          <span class="role-badge">Parent / student</span>
+          <h1 id="dash-family-title">Anaya Sharma · Grade 8</h1>
+          <p class="sub" style="margin: 0; color: var(--muted); font-size: 0.9375rem;">Linked to Greenfield Academy · Skill &amp; learning journey</p>
+        </div>
+        <button type="button" class="btn btn-ghost" id="logoutFamily">Sign out</button>
+      </div>
+      <div class="dashboard-grid">
+        <div class="panel">
+          <h2>Progress reports</h2>
+          <p class="panel-hint">Tap any row for full details</p>
+          <div class="list-rows" id="familyReports"></div>
+        </div>
+        <div class="panel">
+          <h2>Skill-based services</h2>
+          <p class="panel-hint">Tap any row for full details</p>
+          <div class="list-rows" id="familySkills"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      iQuery COE platform prototype · HTML, CSS &amp; JavaScript · Client-side preview only
+    </footer>
+  </div>
+
+  <div id="detailModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal" role="document">
+      <div class="modal-header">
+        <div>
+          <div class="modal-type" id="modalType"></div>
+          <h2 id="modalTitle"></h2>
+        </div>
+        <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const views = {
+        landing: document.getElementById("view-landing"),
+        auth: document.getElementById("view-auth"),
+        "dashboard-spoc": document.getElementById("view-dashboard-spoc"),
+        "dashboard-family": document.getElementById("view-dashboard-family"),
+      };
+
+      const tabSignin = document.getElementById("tab-signin");
+      const tabSignup = document.getElementById("tab-signup");
+      const authForm = document.getElementById("authForm");
+      const authSubmit = document.getElementById("authSubmit");
+      const authMsg = document.getElementById("authMsg");
+      const signupExtra = document.getElementById("signupExtra");
+      const orgInput = document.getElementById("org");
+
+      let authMode = "signin";
+
+      function showView(name) {
+        Object.entries(views).forEach(([key, el]) => {
+          if (!el) return;
+          el.classList.toggle("is-active", key === name);
+        });
+        const onDash = name === "dashboard-spoc" || name === "dashboard-family";
+        document.getElementById("headerLoginBtn").style.display = onDash ? "none" : "inline-flex";
+      }
+
+      function setAuthMode(mode) {
+        authMode = mode;
+        const isSignin = mode === "signin";
+        tabSignin.classList.toggle("is-selected", isSignin);
+        tabSignup.classList.toggle("is-selected", !isSignin);
+        tabSignin.setAttribute("aria-selected", isSignin);
+        tabSignup.setAttribute("aria-selected", !isSignin);
+        signupExtra.hidden = isSignin;
+        orgInput.required = !isSignin;
+        authSubmit.textContent = isSignin ? "Sign in" : "Create account";
+        document.getElementById("auth-title").textContent = isSignin ? "Welcome back" : "Create your account";
+        document.querySelector("#view-auth .sub").textContent = isSignin
+          ? "This prototype signs you in entirely in the browser—use any email and a password of at least 6 characters to explore the journey."
+          : "For school SPOCs, add your organisation name. Use any email and a password of at least 6 characters; sign-up is simulated in the browser only.";
+        hideMsg();
+      }
+
+      function hideMsg() {
+        authMsg.classList.remove("is-visible");
+        authMsg.textContent = "";
+      }
+
+      function showMsg(text) {
+        authMsg.textContent = text;
+        authMsg.classList.add("is-visible");
+      }
+
+      document.querySelectorAll("[data-show]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.getAttribute("data-show");
+          const role = btn.getAttribute("data-role");
+          if (role) {
+            const radio = authForm.querySelector(`input[name="role"][value="${role}"]`);
+            if (radio) radio.checked = true;
+          }
+          if (target === "auth") setAuthMode("signin");
+          showView(target);
+        });
+      });
+
+      tabSignin.addEventListener("click", () => setAuthMode("signin"));
+      tabSignup.addEventListener("click", () => setAuthMode("signup"));
+
+      authForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        hideMsg();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const role = authForm.querySelector('input[name="role"]:checked')?.value || "spoc";
+        const org = orgInput.value.trim();
+
+        if (!email || !password) {
+          showMsg("Please enter email and password.");
+          return;
+        }
+        if (password.length < 6) {
+          showMsg("Password must be at least 6 characters.");
+          return;
+        }
+        if (authMode === "signup" && role === "spoc" && !org) {
+          showMsg("Please enter your school or organisation name.");
+          return;
+        }
+
+        if (role === "spoc") {
+          showView("dashboard-spoc");
+        } else {
+          showView("dashboard-family");
+        }
+      });
+
+      document.getElementById("logoutSpoc").addEventListener("click", () => {
+        authForm.reset();
+        setAuthMode("signin");
+        showView("landing");
+      });
+      document.getElementById("logoutFamily").addEventListener("click", () => {
+        authForm.reset();
+        setAuthMode("signin");
+        showView("landing");
+      });
+
+      const detailCatalog = {
+        "spoc-svc-1": { type: "Active service", title: "STEM lab enablement", summary: "COE is setting up a maker space and inquiry lab with equipment, safety protocols, and teacher onboarding.", fields: [["COE lead", "Arjun Mehta"], ["Phase", "Week 6 of 10"], ["Next milestone", "Equipment QA · 20 May 2026"], ["Budget used", "62%"]], bullets: ["<strong>Done:</strong> 12 workstations delivered", "<strong>In progress:</strong> Safety signage", "<strong>Upcoming:</strong> Parent demo evening"], actions: ["Download service plan", "Message COE lead"] },
+        "spoc-svc-2": { type: "Active service", title: "Teacher PD — inquiry learning", summary: "Cohort-based PD with classroom coaching and lesson study cycles.", fields: [["Cohort", "B — 18 teachers"], ["Next session", "18 May 2026"], ["Attendance", "94%"], ["Rating", "4.6 / 5"]], bullets: ["<strong>Last session:</strong> Formative assessment", "<strong>Coaching:</strong> 6 of 18 classrooms done"], actions: ["View agenda", "Register substitute"] },
+        "spoc-svc-3": { type: "Active service", title: "Digital safety & citizenship", summary: "Policy alignment, student workshops, and parent communication templates.", fields: [["Status", "Awaiting sign-off"], ["Draft sent", "10 May 2026"], ["Workshops", "Grades 5–10 · June"]], bullets: ["<strong>Action:</strong> Review policy v2.1", "<strong>Unlocks:</strong> Workshop scheduling"], actions: ["Open policy draft", "Approve workshops"] },
+        "spoc-svc-4": { type: "Active service", title: "Leadership coaching — principal circle", summary: "Monthly principal roundtable on strategic planning and board reporting.", fields: [["Cadence", "Monthly"], ["Next", "30 May 2026"]], bullets: ["<strong>Q2 focus:</strong> Board-ready improvement narrative"], actions: ["View coaching notes"] },
+        "spoc-aud-1": { type: "Audit", title: "Teaching & learning walkthrough", summary: "Onsite review of lesson quality and student engagement.", fields: [["Completed", "2 May 2026"], ["Rating", "Strong — 3 recommendations"], ["Report", "In portal"]], bullets: ["<strong>Strength:</strong> Learning intentions in KS3", "<strong>Growth:</strong> Differentiation"], actions: ["Download report", "Book follow-up"] },
+        "spoc-aud-2": { type: "Audit", title: "Safeguarding readiness", summary: "Desk review and half-day onsite safeguarding check.", fields: [["Scheduled", "22 May 2026"], ["Lead", "Helen Brooks"], ["Checklist", "8 of 10 done"]], bullets: ["<strong>Pending:</strong> Training log upload", "<strong>Pending:</strong> Visitor policy sign-off"], actions: ["Open checklist", "Reschedule"] },
+        "spoc-aud-3": { type: "Audit", title: "Data & assessment systems", summary: "Review of assessment data from classroom to leadership dashboards.", fields: [["Status", "Planning"], ["Window", "July 2026"]], bullets: ["<strong>Scope:</strong> MIS, interim tests, reporting"], actions: ["Confirm dates"] },
+        "spoc-rep-1": { type: "School progress report", title: "Q1 2026 school improvement summary", summary: "Termly snapshot for governors and SLT with COE impact and Q2 priorities.", fields: [["Progress", "78% targets on track"], ["COE lead", "Priya N."], ["Published", "28 Apr 2026"]], bullets: ["<strong>Highlight:</strong> Literacy grades 3–5", "<strong>Risk:</strong> Grade 7 maths reasoning"], actions: ["Open full report", "Share with governors"] },
+        "spoc-rep-2": { type: "School progress report", title: "Literacy programme adoption", summary: "Roll-out of COE structured literacy across primary and lower secondary.", fields: [["Adoption", "64% classrooms"], ["Teachers trained", "41"], ["Impact", "+12% fluency"]], bullets: ["<strong>Strong:</strong> Years 3–4", "<strong>Support:</strong> Year 7 vocabulary"], actions: ["Class breakdown"] },
+        "spoc-rep-3": { type: "School progress report", title: "Wellbeing & pastoral pulse", summary: "Survey synthesis and pastoral intervention uptake.", fields: [["Wellbeing index", "71% positive"], ["Interventions", "38 students"]], bullets: ["<strong>Trend:</strong> KS3 belonging up", "<strong>Watch:</strong> Grade 10 exam anxiety"], actions: ["Download deck"] },
+        "fam-rep-1": { type: "Progress report", title: "Term 2 holistic progress", summary: "Anaya’s attainment, effort, and next steps across core subjects.", fields: [["Overall", "82%"], ["Tutor", "Ms. Patel"], ["Published", "28 Apr 2026"]], bullets: ["<strong>Strength:</strong> English writing", "<strong>Focus:</strong> Maths problem solving"], actions: ["Download PDF", "Book parent evening"] },
+        "fam-rep-2": { type: "Progress report", title: "Mathematics competency map", summary: "Skills grid after May diagnostic.", fields: [["Secure", "71% competencies"], ["Diagnostic", "6 May 2026"]], bullets: ["<strong>Secure:</strong> Number fluency", "<strong>Developing:</strong> Ratio & data"], actions: ["Practice activities"] },
+        "fam-rep-3": { type: "Progress report", title: "Science inquiry portfolio", summary: "COE inquiry unit samples and rubric scores.", fields: [["Score", "88%"], ["Project", "Ecosystems study"]], bullets: ["<strong>Note:</strong> Excellent group collaboration"], actions: ["View gallery"] },
+        "fam-skl-1": { type: "Skill-based service", title: "Public speaking studio", summary: "Six sessions on voice, structure, and confidence.", fields: [["Progress", "4 of 6"], ["Next", "21 May · 4:15 PM"], ["Coach", "Riya Desai"]], bullets: ["<strong>Last:</strong> Persuasive speeches", "<strong>Home:</strong> 3-min hobby talk"], actions: ["Session materials", "Notify absence"] },
+        "fam-skl-2": { type: "Skill-based service", title: "Design thinking sprint", summary: "Weekend intensive: empathy, prototyping, mentor pitch.", fields: [["Status", "Waitlist #3"], ["Dates", "7–8 June if offered"]], bullets: ["Complete interest form for priority"], actions: ["Complete form"] },
+        "fam-skl-3": { type: "Skill-based service", title: "Financial literacy (family module)", summary: "Parent–student workshops on budgeting and saving.", fields: [["Opens", "June 2026"], ["Fee", "Included for partners"]], bullets: ["Limited to 40 families"], actions: ["Join waitlist"] },
+        "fam-skl-4": { type: "Skill-based service", title: "Coding club — micro:bit", summary: "Intro to physical computing after school.", fields: [["Sessions", "2 of 8"], ["Next", "16 May 2026"]], bullets: ["<strong>Project:</strong> Light sensor garden monitor"], actions: ["Kit list"] },
+      };
+
+      const spocServices = [
+        { id: "spoc-svc-1", title: "STEM lab enablement", meta: "On-site setup · Week 6 of 10", status: "ok", label: "On track" },
+        { id: "spoc-svc-2", title: "Teacher PD — inquiry learning", meta: "Cohort B · Next session 18 May", status: "ok", label: "On track" },
+        { id: "spoc-svc-3", title: "Digital safety &amp; citizenship", meta: "Policy review pending your sign-off", status: "warn", label: "Action" },
+        { id: "spoc-svc-4", title: "Leadership coaching — principal circle", meta: "Monthly · Next 30 May", status: "ok", label: "On track" },
+      ];
+
+      const spocAudits = [
+        { id: "spoc-aud-1", title: "Teaching &amp; learning walkthrough", meta: "Completed 2 May 2026", status: "ok", label: "Complete" },
+        { id: "spoc-aud-2", title: "Safeguarding readiness", meta: "Scheduled · 22 May 2026", status: "pending", label: "Scheduled" },
+        { id: "spoc-aud-3", title: "Data &amp; assessment systems", meta: "Planning · July 2026", status: "pending", label: "Planned" },
+      ];
+
+      const spocReports = [
+        { id: "spoc-rep-1", title: "Q1 2026 school improvement summary", meta: "COE lead: Priya N. · PDF in portal", pct: 78 },
+        { id: "spoc-rep-2", title: "Literacy programme adoption", meta: "Across grades 3–8", pct: 64 },
+        { id: "spoc-rep-3", title: "Wellbeing &amp; pastoral pulse", meta: "Term 2 survey synthesis", pct: 71 },
+      ];
+
+      const familyReports = [
+        { id: "fam-rep-1", title: "Term 2 holistic progress", meta: "Published 28 Apr 2026", pct: 82 },
+        { id: "fam-rep-2", title: "Mathematics competency map", meta: "Updated after May diagnostic", pct: 71 },
+        { id: "fam-rep-3", title: "Science inquiry portfolio", meta: "COE inquiry unit · Grade 8", pct: 88 },
+      ];
+
+      const familySkills = [
+        { id: "fam-skl-1", title: "Public speaking studio", meta: "4 of 6 sessions completed", status: "ok", label: "Active" },
+        { id: "fam-skl-2", title: "Design thinking sprint", meta: "Waitlisted · position 3", status: "pending", label: "Waitlist" },
+        { id: "fam-skl-3", title: "Financial literacy (family module)", meta: "Opens June 2026", status: "pending", label: "Upcoming" },
+        { id: "fam-skl-4", title: "Coding club — micro:bit", meta: "2 of 8 sessions · Active", status: "ok", label: "Active" },
+      ];
+
+      const modal = document.getElementById("detailModal");
+      const modalType = document.getElementById("modalType");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalBody = document.getElementById("modalBody");
+      const modalClose = document.getElementById("modalClose");
+      let lastFocus = null;
+
+      function openDetail(id) {
+        const d = detailCatalog[id];
+        if (!d) return;
+        lastFocus = document.activeElement;
+        modalType.textContent = d.type;
+        modalTitle.textContent = d.title;
+        modalBody.innerHTML =
+          '<p class="summary">' + d.summary + "</p>" +
+          '<div class="detail-grid">' +
+          d.fields.map(function (f) { return '<div class="detail-row"><span>' + f[0] + "</span><span>" + f[1] + "</span></div>"; }).join("") +
+          '</div><ul class="detail-list">' +
+          d.bullets.map(function (b) { return "<li>" + b + "</li>"; }).join("") +
+          '</ul><div class="modal-actions">' +
+          d.actions.map(function (a) { return '<button type="button" class="btn btn-outline modal-demo-btn">' + a + "</button>"; }).join("") +
+          "</div>";
+        modal.hidden = false;
+        modal.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        modalClose.focus();
+        modalBody.querySelectorAll(".modal-demo-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            alert('Prototype only: "' + btn.textContent + '" would open in the full product.');
+          });
+        });
+      }
+
+      function closeDetail() {
+        modal.classList.remove("is-open");
+        modal.hidden = true;
+        document.body.style.overflow = "";
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      modalClose.addEventListener("click", closeDetail);
+      modal.addEventListener("click", function (e) { if (e.target === modal) closeDetail(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("is-open")) closeDetail();
+      });
+
+      function statusClass(s) {
+        if (s === "ok") return "status-ok";
+        if (s === "warn") return "status-warn";
+        return "status-pending";
+      }
+
+      function renderList(containerId, items, type) {
+        const el = document.getElementById(containerId);
+        if (!el) return;
+        el.innerHTML = items
+          .map((item) => {
+            if (type === "progress") {
+              return `
+              <button type="button" class="row-item" data-detail-id="${item.id}" aria-label="Open details: ${item.title}">
+                <div>
+                  <strong>${item.title}</strong>
+                  <span class="meta">${item.meta}</span>
+                  <div class="progress-bar" aria-hidden="true"><i style="width:${item.pct}%"></i></div>
+                </div>
+                <span class="status status-ok">${item.pct}%</span>
+                <span class="row-chevron" aria-hidden="true">›</span>
+              </button>`;
+            }
+            return `
+              <button type="button" class="row-item" data-detail-id="${item.id}" aria-label="Open details: ${item.title}">
+                <div>
+                  <strong>${item.title}</strong>
+                  <span class="meta">${item.meta}</span>
+                </div>
+                <span class="status ${statusClass(item.status)}">${item.label}</span>
+                <span class="row-chevron" aria-hidden="true">›</span>
+              </button>`;
+          })
+          .join("");
+        el.querySelectorAll("[data-detail-id]").forEach((btn) => {
+          btn.addEventListener("click", () => openDetail(btn.getAttribute("data-detail-id")));
+        });
+      }
+
+      renderList("spocServices", spocServices, "status");
+      renderList("spocAudits", spocAudits, "status");
+      renderList("spocReports", spocReports, "progress");
+      renderList("familyReports", familyReports, "progress");
+      renderList("familySkills", familySkills, "status");
+    })();
+  </script>
+</body>
+</html>
