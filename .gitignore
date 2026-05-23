@@ -1,2 +1,9 @@
 # Local tunnel helper downloads binaries here (do not commit)
 .tools/
+
+# Local assets (not part of the web prototype)
+*.pdf
+*.png
+
+# Accidental local URL paths
+http:/
