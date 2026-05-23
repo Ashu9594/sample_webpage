@@ -72,7 +72,11 @@ Ngrok needs a **free account** and a one-time authtoken (cannot run without it).
 
 **Free tier notes:** Visitors may see a short ngrok interstitial on first visit; URLs change when you restart ngrok unless you use a reserved domain on a paid plan.
 
-## How to open it
+## Live site status
+
+**Currently offline.** The public GitHub Pages URL is disabled. Code remains in [github.com/Ashu9594/sample_webpage](https://github.com/Ashu9594/sample_webpage). To go live again later, see **Re-enable GitHub Pages** below.
+
+## How to open it (local)
 
 ### Option A — Double-click (quickest)
 
@@ -129,3 +133,21 @@ With the server running (Option B), press **Cmd+Shift+P**, run **“Simple Brows
 
 - This is a **front-end preview** for demos and walkthroughs, not a production app.
 - There is **no backend**; data is not saved or transmitted.
+
+## Re-enable GitHub Pages (when ready)
+
+1. On GitHub: **Settings → Pages → Build and deployment → Source** → choose **Deploy from a branch**.
+2. Branch: **gh-pages** / **/ (root)** — or restore the deploy workflow from git history.
+3. From this folder, recreate `gh-pages` and push:
+
+   ```bash
+   git checkout --orphan gh-pages
+   git rm -rf .
+   cp index.html .
+   git add index.html
+   git commit -m "Publish site"
+   git push -f origin gh-pages
+   git checkout main
+   ```
+
+   Site URL: **https://ashu9594.github.io/sample_webpage/**
